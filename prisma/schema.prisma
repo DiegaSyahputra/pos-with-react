@@ -1,0 +1,86 @@
+// Prisma schema for POS Web Application
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String        @id @default(uuid())
+  username     String        @unique
+  name         String
+  email        String?       @unique
+  password     String
+  role         String        @default("CASHIER") // "ADMIN", "CASHIER"
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id               String            @id @default(uuid())
+  sku              String            @unique
+  name             String
+  description      String?
+  price            Float
+  costPrice        Float             @default(0)
+  stock            Int               @default(0)
+  imageUrl         String?
+  categoryId       String
+  category         Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  transactionItems TransactionItem[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model Customer {
+  id           String        @id @default(uuid())
+  name         String
+  phone        String?       @unique
+  email        String?       @unique
+  points       Int           @default(0)
+  transactions Transaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Transaction {
+  id             String            @id @default(uuid())
+  invoiceNo      String            @unique
+  totalAmount    Float
+  taxAmount      Float             @default(0)
+  discountAmount Float             @default(0)
+  paymentMethod  String            @default("CASH") // CASH, QRIS, TRANSFER, CARD
+  paymentAmount  Float
+  changeAmount   Float             @default(0)
+  customerId     String?
+  customer       Customer?         @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  userId         String?
+  user           User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  items          TransactionItem[]
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+}
+
+model TransactionItem {
+  id            String      @id @default(uuid())
+  transactionId String
+  transaction   Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  productId     String
+  product       Product     @relation(fields: [productId], references: [id]) // Restrict deletion if product has sales history
+  quantity      Int
+  unitPrice     Float
+  subtotal      Float
+}

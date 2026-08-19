@@ -1,0 +1,37 @@
+{
+  "name": "pos-dashboard-bun-elysia",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot src/index.ts",
+    "start": "NODE_ENV=production bun src/index.ts",
+    "build": "bun run build.ts",
+    "test": "bun test",
+    "seed": "bun prisma/seed.ts",
+    "db:push": "bunx prisma db push",
+    "db:generate": "bunx prisma generate"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.2",
+    "@elysiajs/html": "^1.4.2",
+    "@elysiajs/jwt": "^1.4.2",
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
+    "bun-plugin-tailwind": "^0.1.2",
+    "dotenv": "^17.4.2",
+    "elysia": "^1.4.29",
+    "lucide-react": "^1.32.0",
+    "pg": "^8.23.0",
+    "react": "^19",
+    "react-dom": "^19",
+    "tailwindcss": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prisma": "^7.9.1"
+  }
+}
