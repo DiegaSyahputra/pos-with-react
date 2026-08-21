@@ -61,8 +61,7 @@ export const app = new Elysia()
   .use(html())
   .use(authMiddleware)
 
-  // BUNGKUS SEMUA API ROUTES DI DALAM GROUP /api
-
+  // Register All POS API Routes (authRoutes dkk sudah punya prefix /api/auth, dst)
   .use(authRoutes)
   .use(usersRoutes)
   .use(categoriesRoutes)
@@ -72,7 +71,7 @@ export const app = new Elysia()
   .use(dashboardRoutes)
   .use(reportsRoutes)
 
-  // Serve Frontend Bundled JS & CSS
+  // Serve Frontend Bundled Assets
   .get("/frontend.js", async () => {
     const jsCode = await getFrontendBundle();
     return new Response(jsCode, {
@@ -108,8 +107,8 @@ export const app = new Elysia()
     });
   });
 
-// Jalankan listen hanya saat di luar Vercel (Lokal/Development)
-if (process.env.VERCEL !== "1") {
+// Jalankan server lokal hanya jika bukan di environment Vercel
+if (!process.env.VERCEL) {
   app.listen(PORT);
   console.log(
     `🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`,
