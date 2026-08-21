@@ -1,6 +1,5 @@
 {
   "bunVersion": "1.x",
-  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/(.*)",
