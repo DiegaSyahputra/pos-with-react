@@ -620,7 +620,7 @@ export const POSStore = {
         include: { _count: { select: { products: true } } },
         orderBy: { name: "asc" },
       });
-      return dbCategories.map((c) => ({
+      return dbCategories.map((c: any) => ({
         ...c,
         _count: { products: c._count.products },
       }));
@@ -1097,7 +1097,7 @@ export const POSStore = {
 
     try {
       // Interactive Prisma Transaction for Atomic Execution
-      return await prisma.$transaction(async (tx) => {
+      return await prisma.$transaction(async (tx: any) => {
         const invoiceNo = generateInvoiceNumber();
         const itemsToCreate = [];
 
@@ -1327,7 +1327,7 @@ export const POSStore = {
         string,
         { count: number; amount: number }
       > = {};
-      transactions.forEach((tx) => {
+      transactions.forEach((tx: any) => {
         const method = tx.paymentMethod || "CASH";
         if (!paymentBreakdown[method]) {
           paymentBreakdown[method] = { count: 0, amount: 0 };
@@ -1454,11 +1454,11 @@ export const POSStore = {
 
       const totalSalesRevenue = salesAggregate._sum.totalAmount || 0;
 
-      const categoryBreakdown = categories.map((cat) => {
+      const categoryBreakdown = categories.map((cat: any) => {
         let totalRevenue = 0;
         let totalQty = 0;
-        cat.products.forEach((p) => {
-          p.transactionItems.forEach((ti) => {
+        cat.products.forEach((p: any) => {
+          p.transactionItems.forEach((ti: any) => {
             totalRevenue += ti.subtotal || 0;
             totalQty += ti.quantity || 0;
           });
