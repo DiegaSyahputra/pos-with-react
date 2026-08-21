@@ -1397,11 +1397,9 @@ export const POSCashier: React.FC<POSCashierProps> = ({
             <div className="text-center pb-4 border-b border-dashed border-slate-300">
               <Sparkles className="w-6 h-6 text-indigo-600 mx-auto mb-1" />
               <h3 className="text-base font-extrabold tracking-wider uppercase text-slate-900">
-                POS CAFE & RESTO
+                CAFE PANDAWA
               </h3>
-              <p className="text-[10px] text-slate-500">
-                Struk Resmi Pembayaran
-              </p>
+              <p className="text-[10px] text-slate-500">Struk Pembayaran</p>
               <p className="text-[10px] text-slate-700 font-bold mt-2">
                 {receiptData.invoiceNo}
               </p>
