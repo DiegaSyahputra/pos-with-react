@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun --hot src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
-    "build": "bun run build.ts",
+    "build": "prisma generate && bun run build.ts",
     "test": "bun test",
     "seed": "bun prisma/seed.ts",
     "db:push": "bunx prisma db push",
