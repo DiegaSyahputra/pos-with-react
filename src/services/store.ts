@@ -45,29 +45,168 @@ interface MemoryCustomer {
 
 // In-Memory Fallback State (when PostgreSQL DB is disconnected)
 let memoryUsers: MemoryUser[] = [
-  { id: "usr-1", username: "admin", password: "$2a$10$8.Xy1/Y1u.p.x2k/c9X/7e8n3uX9r8a7b6c5d4e3f2g1h0i9j8k7", name: "Administrator POS", email: "admin@pos.com", role: "ADMIN" },
-  { id: "usr-2", username: "kasir", password: "$2a$10$8.Xy1/Y1u.p.x2k/c9X/7e8n3uX9r8a7b6c5d4e3f2g1h0i9j8k7", name: "Kasir Toko Utama", email: "kasir@pos.com", role: "CASHIER" },
+  {
+    id: "usr-1",
+    username: "admin",
+    password: "$2a$10$8.Xy1/Y1u.p.x2k/c9X/7e8n3uX9r8a7b6c5d4e3f2g1h0i9j8k7",
+    name: "Administrator POS",
+    email: "admin@pos.com",
+    role: "ADMIN",
+  },
+  {
+    id: "usr-2",
+    username: "kasir",
+    password: "$2a$10$8.Xy1/Y1u.p.x2k/c9X/7e8n3uX9r8a7b6c5d4e3f2g1h0i9j8k7",
+    name: "Kasir Toko Utama",
+    email: "kasir@pos.com",
+    role: "CASHIER",
+  },
 ];
 
 let memoryCategories: MemoryCategory[] = [
-  { id: "cat-1", name: "Minuman (Beverages)", description: "Aneka kopi, teh, boba, dan jus segar", createdAt: new Date(), updatedAt: new Date() },
-  { id: "cat-2", name: "Makanan Utama (Main Course)", description: "Nasi goreng, mie, dan hidangan berat", createdAt: new Date(), updatedAt: new Date() },
-  { id: "cat-3", name: "Camilan (Snacks)", description: "Kentang goreng, roti bakar, kue", createdAt: new Date(), updatedAt: new Date() },
+  {
+    id: "cat-1",
+    name: "Minuman (Beverages)",
+    description: "Aneka kopi, teh, boba, dan jus segar",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "cat-2",
+    name: "Makanan Utama (Main Course)",
+    description: "Nasi goreng, mie, dan hidangan berat",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "cat-3",
+    name: "Camilan (Snacks)",
+    description: "Kentang goreng, roti bakar, kue",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 let memoryProducts: MemoryProduct[] = [
-  { id: "prod-1", sku: "BEV-001", name: "Kopi Susu Gula Aren", description: "Espresso premium dengan susu segar & gula aren", price: 18000, costPrice: 8000, stock: 45, imageUrl: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80", categoryId: "cat-1", createdAt: new Date(), updatedAt: new Date() },
-  { id: "prod-2", sku: "BEV-002", name: "Matcha Latte Ice", description: "Bubuk matcha jepang pilihan dengan fresh milk", price: 22000, costPrice: 10000, stock: 30, imageUrl: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80", categoryId: "cat-1", createdAt: new Date(), updatedAt: new Date() },
-  { id: "prod-3", sku: "BEV-003", name: "Es Teh Manis Jumbo", description: "Teh melati harum porsi besar", price: 8000, costPrice: 2500, stock: 5, imageUrl: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=400&q=80", categoryId: "cat-1", createdAt: new Date(), updatedAt: new Date() },
-  { id: "prod-4", sku: "FOD-001", name: "Nasi Goreng Spesial POS", description: "Nasi goreng rempah dengan telur mata sapi & ayam", price: 28000, costPrice: 12000, stock: 25, imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=400&q=80", categoryId: "cat-2", createdAt: new Date(), updatedAt: new Date() },
-  { id: "prod-5", sku: "FOD-002", name: "Mie Goreng Rendang", description: "Mie telur tumis dengan potongan daging rendang", price: 32000, costPrice: 15000, stock: 8, imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=400&q=80", categoryId: "cat-2", createdAt: new Date(), updatedAt: new Date() },
-  { id: "prod-6", sku: "SNK-001", name: "French Fries BBQ", description: "Kentang renyah tabur bumbu BBQ gurih", price: 15000, costPrice: 6000, stock: 50, imageUrl: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=400&q=80", categoryId: "cat-3", createdAt: new Date(), updatedAt: new Date() },
-  { id: "prod-7", sku: "SNK-002", name: "Roti Bakar Cokelat Keju", description: "Roti bakar lelehan cokelat & keju cheddar", price: 18000, costPrice: 7000, stock: 3, imageUrl: "https://images.unsplash.com/photo-1584776296944-ab6fb57b0bff?auto=format&fit=crop&w=400&q=80", categoryId: "cat-3", createdAt: new Date(), updatedAt: new Date() },
+  {
+    id: "prod-1",
+    sku: "BEV-001",
+    name: "Kopi Susu Gula Aren",
+    description: "Espresso premium dengan susu segar & gula aren",
+    price: 18000,
+    costPrice: 8000,
+    stock: 45,
+    imageUrl:
+      "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-1",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "prod-2",
+    sku: "BEV-002",
+    name: "Matcha Latte Ice",
+    description: "Bubuk matcha jepang pilihan dengan fresh milk",
+    price: 22000,
+    costPrice: 10000,
+    stock: 30,
+    imageUrl:
+      "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-1",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "prod-3",
+    sku: "BEV-003",
+    name: "Es Teh Manis Jumbo",
+    description: "Teh melati harum porsi besar",
+    price: 8000,
+    costPrice: 2500,
+    stock: 5,
+    imageUrl:
+      "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-1",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "prod-4",
+    sku: "FOD-001",
+    name: "Nasi Goreng Spesial POS",
+    description: "Nasi goreng rempah dengan telur mata sapi & ayam",
+    price: 28000,
+    costPrice: 12000,
+    stock: 25,
+    imageUrl:
+      "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-2",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "prod-5",
+    sku: "FOD-002",
+    name: "Mie Goreng Rendang",
+    description: "Mie telur tumis dengan potongan daging rendang",
+    price: 32000,
+    costPrice: 15000,
+    stock: 8,
+    imageUrl:
+      "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-2",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "prod-6",
+    sku: "SNK-001",
+    name: "French Fries BBQ",
+    description: "Kentang renyah tabur bumbu BBQ gurih",
+    price: 15000,
+    costPrice: 6000,
+    stock: 50,
+    imageUrl:
+      "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-3",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "prod-7",
+    sku: "SNK-002",
+    name: "Roti Bakar Cokelat Keju",
+    description: "Roti bakar lelehan cokelat & keju cheddar",
+    price: 18000,
+    costPrice: 7000,
+    stock: 3,
+    imageUrl:
+      "https://images.unsplash.com/photo-1584776296944-ab6fb57b0bff?auto=format&fit=crop&w=400&q=80",
+    categoryId: "cat-3",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 let memoryCustomers: MemoryCustomer[] = [
-  { id: "cust-1", name: "Budi Santoso", phone: "081234567890", email: "budi.santoso@example.com", points: 120, createdAt: new Date(), updatedAt: new Date() },
-  { id: "cust-2", name: "Siti Rahmawati", phone: "089876543210", email: "siti.rahma@example.com", points: 50, createdAt: new Date(), updatedAt: new Date() },
+  {
+    id: "cust-1",
+    name: "Budi Santoso",
+    phone: "081234567890",
+    email: "budi.santoso@example.com",
+    points: 120,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: "cust-2",
+    name: "Siti Rahmawati",
+    phone: "089876543210",
+    email: "siti.rahma@example.com",
+    points: 50,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 let memoryTransactions: any[] = [
@@ -83,11 +222,30 @@ let memoryTransactions: any[] = [
     customerId: "cust-1",
     customer: { id: "cust-1", name: "Budi Santoso", phone: "081234567890" },
     userId: "usr-2",
-    user: { id: "usr-2", name: "Kasir Toko Utama", username: "kasir", role: "CASHIER" },
+    user: {
+      id: "usr-2",
+      name: "Kasir Toko Utama",
+      username: "kasir",
+      role: "CASHIER",
+    },
     createdAt: new Date(Date.now() - 3600000 * 4), // 4 hours ago
     items: [
-      { id: "item-1", productId: "prod-1", productName: "Kopi Susu Gula Aren", quantity: 2, unitPrice: 18000, subtotal: 36000 },
-      { id: "item-2", productId: "prod-4", productName: "Nasi Goreng Spesial POS", quantity: 1, unitPrice: 28000, subtotal: 28000 },
+      {
+        id: "item-1",
+        productId: "prod-1",
+        productName: "Kopi Susu Gula Aren",
+        quantity: 2,
+        unitPrice: 18000,
+        subtotal: 36000,
+      },
+      {
+        id: "item-2",
+        productId: "prod-4",
+        productName: "Nasi Goreng Spesial POS",
+        quantity: 1,
+        unitPrice: 28000,
+        subtotal: 28000,
+      },
     ],
   },
 ];
@@ -130,7 +288,10 @@ export const POSStore = {
       try {
         isMatch = await Bun.password.verify(password, user.password);
       } catch {
-        isMatch = (username === "admin" && password === "admin123") || (username === "kasir" && password === "kasir123") || user.password === password;
+        isMatch =
+          (username === "admin" && password === "admin123") ||
+          (username === "kasir" && password === "kasir123") ||
+          user.password === password;
       }
 
       if (!isMatch) {
@@ -158,7 +319,7 @@ export const POSStore = {
     }
   },
 
-  async getUsers(params?: { page?: number; limit?: number }) {
+  async getUsers(params?: { page?: number; limit?: number; role?: string }) {
     const page = params?.page ? Math.max(1, Number(params.page)) : 1;
     const limit = params?.limit ? Math.max(1, Number(params.limit)) : 20;
     const skip = (page - 1) * limit;
@@ -166,20 +327,42 @@ export const POSStore = {
     try {
       const dbUser = (prisma as any).user;
       if (!dbUser) {
+        // Fallback memory: filter role jika param dikirim
+        const filteredMemory = params?.role
+          ? memoryUsers.filter((u) => u.role === params.role)
+          : memoryUsers;
+
         return {
-          data: memoryUsers.map(({ password: _, ...u }) => u),
-          meta: { total: memoryUsers.length, page: 1, limit: 100, totalPages: 1 },
+          data: filteredMemory.map(({ password: _, ...u }) => u),
+          meta: {
+            total: filteredMemory.length,
+            page: 1,
+            limit: 100,
+            totalPages: 1,
+          },
         };
       }
 
+      // Buat kondisi filter dimana jika role dikirimkan
+      const where = params?.role ? { role: params.role } : {};
+
       const [users, total] = await prisma.$transaction([
         dbUser.findMany({
-          select: { id: true, username: true, name: true, email: true, role: true, createdAt: true, updatedAt: true },
+          where,
+          select: {
+            id: true,
+            username: true,
+            name: true,
+            email: true,
+            role: true,
+            createdAt: true,
+            updatedAt: true,
+          },
           orderBy: { name: "asc" },
           skip,
           take: limit,
         }),
-        dbUser.count(),
+        dbUser.count({ where }),
       ]);
 
       return {
@@ -187,15 +370,83 @@ export const POSStore = {
         meta: { total, page, limit, totalPages: Math.ceil(total / limit) },
       };
     } catch {
+      // Fallback error memory: filter role jika param dikirim
+      const filteredMemory = params?.role
+        ? memoryUsers.filter((u) => u.role === params.role)
+        : memoryUsers;
+
       return {
-        data: memoryUsers.map(({ password: _, ...u }) => u),
-        meta: { total: memoryUsers.length, page: 1, limit: 100, totalPages: 1 },
+        data: filteredMemory.map(({ password: _, ...u }) => u),
+        meta: {
+          total: filteredMemory.length,
+          page: 1,
+          limit: 100,
+          totalPages: 1,
+        },
       };
     }
   },
 
-  async createUser(data: { username: string; name: string; email?: string; password: string; role?: string }) {
-    const hashedPassword = await Bun.password.hash(data.password, { algorithm: "bcrypt", cost: 10 });
+  // async getUsers(params?: { page?: number; limit?: number }) {
+  //   const page = params?.page ? Math.max(1, Number(params.page)) : 1;
+  //   const limit = params?.limit ? Math.max(1, Number(params.limit)) : 20;
+  //   const skip = (page - 1) * limit;
+
+  //   try {
+  //     const dbUser = (prisma as any).user;
+  //     if (!dbUser) {
+  //       return {
+  //         data: memoryUsers.map(({ password: _, ...u }) => u),
+  //         meta: {
+  //           total: memoryUsers.length,
+  //           page: 1,
+  //           limit: 100,
+  //           totalPages: 1,
+  //         },
+  //       };
+  //     }
+
+  //     const [users, total] = await prisma.$transaction([
+  //       dbUser.findMany({
+  //         select: {
+  //           id: true,
+  //           username: true,
+  //           name: true,
+  //           email: true,
+  //           role: true,
+  //           createdAt: true,
+  //           updatedAt: true,
+  //         },
+  //         orderBy: { name: "asc" },
+  //         skip,
+  //         take: limit,
+  //       }),
+  //       dbUser.count(),
+  //     ]);
+
+  //     return {
+  //       data: users,
+  //       meta: { total, page, limit, totalPages: Math.ceil(total / limit) },
+  //     };
+  //   } catch {
+  //     return {
+  //       data: memoryUsers.map(({ password: _, ...u }) => u),
+  //       meta: { total: memoryUsers.length, page: 1, limit: 100, totalPages: 1 },
+  //     };
+  //   }
+  // },
+
+  async createUser(data: {
+    username: string;
+    name: string;
+    email?: string;
+    password: string;
+    role?: string;
+  }) {
+    const hashedPassword = await Bun.password.hash(data.password, {
+      algorithm: "bcrypt",
+      cost: 10,
+    });
     const userRole = (data.role || "CASHIER").toUpperCase();
 
     try {
@@ -234,13 +485,19 @@ export const POSStore = {
     }
   },
 
-  async updateUser(id: string, data: { name?: string; email?: string; role?: string; password?: string }) {
+  async updateUser(
+    id: string,
+    data: { name?: string; email?: string; role?: string; password?: string },
+  ) {
     const updateData: any = {};
     if (data.name) updateData.name = data.name;
     if (data.email !== undefined) updateData.email = data.email || null;
     if (data.role) updateData.role = data.role.toUpperCase();
     if (data.password && data.password.trim() !== "") {
-      updateData.password = await Bun.password.hash(data.password, { algorithm: "bcrypt", cost: 10 });
+      updateData.password = await Bun.password.hash(data.password, {
+        algorithm: "bcrypt",
+        cost: 10,
+      });
     }
 
     try {
@@ -287,7 +544,15 @@ export const POSStore = {
     return userProfile;
   },
 
-  async updateUserProfile(userId: string, data: { name?: string; email?: string; oldPassword?: string; newPassword?: string }) {
+  async updateUserProfile(
+    userId: string,
+    data: {
+      name?: string;
+      email?: string;
+      oldPassword?: string;
+      newPassword?: string;
+    },
+  ) {
     try {
       const dbUser = (prisma as any).user;
       let existingUser = null;
@@ -310,7 +575,10 @@ export const POSStore = {
 
         let isOldMatch = false;
         try {
-          isOldMatch = await Bun.password.verify(data.oldPassword, existingUser.password);
+          isOldMatch = await Bun.password.verify(
+            data.oldPassword,
+            existingUser.password,
+          );
         } catch {
           isOldMatch = existingUser.password === data.oldPassword;
         }
@@ -319,7 +587,10 @@ export const POSStore = {
           throw new Error("Password lama salah");
         }
 
-        updateData.password = await Bun.password.hash(data.newPassword, { algorithm: "bcrypt", cost: 10 });
+        updateData.password = await Bun.password.hash(data.newPassword, {
+          algorithm: "bcrypt",
+          cost: 10,
+        });
       }
 
       if (dbUser) {
@@ -349,11 +620,16 @@ export const POSStore = {
         include: { _count: { select: { products: true } } },
         orderBy: { name: "asc" },
       });
-      return dbCategories.map((c) => ({ ...c, _count: { products: c._count.products } }));
+      return dbCategories.map((c) => ({
+        ...c,
+        _count: { products: c._count.products },
+      }));
     } catch {
       return memoryCategories.map((c) => ({
         ...c,
-        _count: { products: memoryProducts.filter((p) => p.categoryId === c.id).length },
+        _count: {
+          products: memoryProducts.filter((p) => p.categoryId === c.id).length,
+        },
       }));
     }
   },
@@ -373,7 +649,9 @@ export const POSStore = {
       if (err.code === "P2002") {
         throw new Error("Nama kategori sudah digunakan");
       }
-      const existing = memoryCategories.find((c) => c.name.toLowerCase() === data.name.toLowerCase());
+      const existing = memoryCategories.find(
+        (c) => c.name.toLowerCase() === data.name.toLowerCase(),
+      );
       if (existing) {
         throw new Error("Nama kategori sudah digunakan");
       }
@@ -389,7 +667,10 @@ export const POSStore = {
     }
   },
 
-  async updateCategory(id: string, data: { name?: string; description?: string }) {
+  async updateCategory(
+    id: string,
+    data: { name?: string; description?: string },
+  ) {
     try {
       const dbCategory = await prisma.category.findUnique({ where: { id } });
       if (dbCategory) {
@@ -421,9 +702,13 @@ export const POSStore = {
     } catch (err: any) {
       if (
         err.code === "P2003" ||
-        (err.message && (err.message.includes("foreign key") || err.message.includes("Foreign key")))
+        (err.message &&
+          (err.message.includes("foreign key") ||
+            err.message.includes("Foreign key")))
       ) {
-        throw new Error("Kategori tidak bisa dihapus karena masih memiliki produk");
+        throw new Error(
+          "Kategori tidak bisa dihapus karena masih memiliki produk",
+        );
       }
       throw new Error(err.message || "Gagal menghapus kategori");
     }
@@ -436,7 +721,12 @@ export const POSStore = {
   },
 
   // Products with Pagination
-  async getProducts(params?: { search?: string; categoryId?: string; page?: number; limit?: number }) {
+  async getProducts(params?: {
+    search?: string;
+    categoryId?: string;
+    page?: number;
+    limit?: number;
+  }) {
     const page = params?.page ? Math.max(1, Number(params.page)) : 1;
     const limit = params?.limit ? Math.max(1, Number(params.limit)) : 20;
     const skip = (page - 1) * limit;
@@ -472,7 +762,10 @@ export const POSStore = {
       let prods = [...memoryProducts];
       if (params?.search) {
         const q = params.search.toLowerCase();
-        prods = prods.filter((p) => p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q));
+        prods = prods.filter(
+          (p) =>
+            p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q),
+        );
       }
       if (params?.categoryId) {
         prods = prods.filter((p) => p.categoryId === params.categoryId);
@@ -492,13 +785,17 @@ export const POSStore = {
 
   async getProductById(id: string) {
     try {
-      return await prisma.product.findUnique({ where: { id }, include: { category: true } });
+      return await prisma.product.findUnique({
+        where: { id },
+        include: { category: true },
+      });
     } catch {
       const prod = memoryProducts.find((p) => p.id === id);
       if (!prod) return null;
       return {
         ...prod,
-        category: memoryCategories.find((c) => c.id === prod.categoryId) || null,
+        category:
+          memoryCategories.find((c) => c.id === prod.categoryId) || null,
       };
     }
   },
@@ -533,7 +830,9 @@ export const POSStore = {
       if (err.code === "P2002") {
         throw new Error("SKU produk sudah digunakan");
       }
-      const existingSku = memoryProducts.find((p) => p.sku.toLowerCase() === data.sku.toLowerCase());
+      const existingSku = memoryProducts.find(
+        (p) => p.sku.toLowerCase() === data.sku.toLowerCase(),
+      );
       if (existingSku) {
         throw new Error("SKU produk sudah digunakan");
       }
@@ -566,7 +865,7 @@ export const POSStore = {
       stock?: number;
       imageUrl?: string;
       categoryId?: string;
-    }
+    },
   ) {
     try {
       const dbProd = await prisma.product.findUnique({ where: { id } });
@@ -599,9 +898,13 @@ export const POSStore = {
     } catch (err: any) {
       if (
         err.code === "P2003" ||
-        (err.message && (err.message.includes("foreign key") || err.message.includes("Foreign key")))
+        (err.message &&
+          (err.message.includes("foreign key") ||
+            err.message.includes("Foreign key")))
       ) {
-        throw new Error("Produk tidak bisa dihapus karena memiliki riwayat transaksi");
+        throw new Error(
+          "Produk tidak bisa dihapus karena memiliki riwayat transaksi",
+        );
       }
       throw new Error(err.message || "Gagal menghapus produk");
     }
@@ -642,7 +945,12 @@ export const POSStore = {
     }
   },
 
-  async createCustomer(data: { name: string; phone?: string; email?: string; points?: number }) {
+  async createCustomer(data: {
+    name: string;
+    phone?: string;
+    email?: string;
+    points?: number;
+  }) {
     try {
       return await prisma.customer.create({ data });
     } catch (err: any) {
@@ -663,7 +971,10 @@ export const POSStore = {
     }
   },
 
-  async updateCustomer(id: string, data: { name?: string; phone?: string; email?: string; points?: number }) {
+  async updateCustomer(
+    id: string,
+    data: { name?: string; phone?: string; email?: string; points?: number },
+  ) {
     try {
       const dbCust = await prisma.customer.findUnique({ where: { id } });
       if (dbCust) {
@@ -714,7 +1025,9 @@ export const POSStore = {
         prisma.transaction.findMany({
           include: {
             customer: true,
-            user: { select: { id: true, name: true, username: true, role: true } },
+            user: {
+              select: { id: true, name: true, username: true, role: true },
+            },
             items: { include: { product: true } },
           },
           orderBy: { createdAt: "desc" },
@@ -743,7 +1056,9 @@ export const POSStore = {
         where: { id },
         include: {
           customer: true,
-          user: { select: { id: true, name: true, username: true, role: true } },
+          user: {
+            select: { id: true, name: true, username: true, role: true },
+          },
           items: { include: { product: true } },
         },
       });
@@ -767,12 +1082,15 @@ export const POSStore = {
       subtotal += item.unitPrice * item.quantity;
     }
 
-    const taxAmount = payload.taxAmount ?? Math.round(subtotal * 0.1 * 100) / 100;
+    const taxAmount =
+      payload.taxAmount ?? Math.round(subtotal * 0.1 * 100) / 100;
     const discountAmount = payload.discountAmount ?? 0;
     const totalAmount = Math.max(0, subtotal + taxAmount - discountAmount);
 
     if (payload.paymentAmount < totalAmount) {
-      throw new Error(`Jumlah pembayaran (Rp ${payload.paymentAmount}) kurang dari total tagihan (Rp ${totalAmount})`);
+      throw new Error(
+        `Jumlah pembayaran (Rp ${payload.paymentAmount}) kurang dari total tagihan (Rp ${totalAmount})`,
+      );
     }
 
     const changeAmount = payload.paymentAmount - totalAmount;
@@ -788,7 +1106,9 @@ export const POSStore = {
         if (payload.userId) {
           const dbUser = (tx as any).user;
           if (dbUser) {
-            const userExists = await dbUser.findUnique({ where: { id: payload.userId } });
+            const userExists = await dbUser.findUnique({
+              where: { id: payload.userId },
+            });
             if (userExists) {
               validUserId = payload.userId;
             }
@@ -798,7 +1118,9 @@ export const POSStore = {
         // Validate customerId exists in PostgreSQL to prevent FK constraint error
         let validCustomerId: string | null = null;
         if (payload.customerId) {
-          const custExists = await tx.customer.findUnique({ where: { id: payload.customerId } });
+          const custExists = await tx.customer.findUnique({
+            where: { id: payload.customerId },
+          });
           if (custExists) {
             validCustomerId = payload.customerId;
           }
@@ -806,7 +1128,9 @@ export const POSStore = {
 
         // Atomic Stock Decrement with Stock Condition
         for (const item of payload.items) {
-          const prodExists = await tx.product.findUnique({ where: { id: item.productId } });
+          const prodExists = await tx.product.findUnique({
+            where: { id: item.productId },
+          });
           if (!prodExists) {
             throw new Error(`PRODUCT_NOT_IN_DB:${item.productId}`);
           }
@@ -822,7 +1146,9 @@ export const POSStore = {
           });
 
           if (updatedProduct.count === 0) {
-            throw new Error(`Stok produk '${prodExists.name}' tidak mencukupi (Tersedia: ${prodExists.stock}, Dibutuhkan: ${item.quantity})`);
+            throw new Error(
+              `Stok produk '${prodExists.name}' tidak mencukupi (Tersedia: ${prodExists.stock}, Dibutuhkan: ${item.quantity})`,
+            );
           }
 
           const itemSubtotal = item.unitPrice * item.quantity;
@@ -852,7 +1178,9 @@ export const POSStore = {
           },
           include: {
             customer: true,
-            user: { select: { id: true, name: true, username: true, role: true } },
+            user: {
+              select: { id: true, name: true, username: true, role: true },
+            },
             items: { include: { product: true } },
           },
         });
@@ -871,7 +1199,12 @@ export const POSStore = {
         return createdTx;
       });
     } catch (err: any) {
-      if (err.message && (err.message.includes("Stok") || err.message.includes("Jumlah") || err.message.includes("tidak"))) {
+      if (
+        err.message &&
+        (err.message.includes("Stok") ||
+          err.message.includes("Jumlah") ||
+          err.message.includes("tidak"))
+      ) {
         throw err;
       }
 
@@ -880,12 +1213,16 @@ export const POSStore = {
       const itemsToProcess = [];
 
       for (const item of payload.items) {
-        const prodIdx = memoryProducts.findIndex((p) => p.id === item.productId);
+        const prodIdx = memoryProducts.findIndex(
+          (p) => p.id === item.productId,
+        );
         if (prodIdx === -1 || !memoryProducts[prodIdx]) {
           throw new Error(`Product with ID '${item.productId}' not found`);
         }
         if (memoryProducts[prodIdx]!.stock < item.quantity) {
-          throw new Error(`Stok produk '${memoryProducts[prodIdx]!.name}' tidak mencukupi`);
+          throw new Error(
+            `Stok produk '${memoryProducts[prodIdx]!.name}' tidak mencukupi`,
+          );
         }
         memoryProducts[prodIdx]!.stock -= item.quantity;
         const itemSubtotal = item.unitPrice * item.quantity;
@@ -912,15 +1249,25 @@ export const POSStore = {
         paymentAmount: payload.paymentAmount,
         changeAmount,
         customerId: payload.customerId || null,
-        customer: memoryCustomers.find((c) => c.id === payload.customerId) || null,
+        customer:
+          memoryCustomers.find((c) => c.id === payload.customerId) || null,
         userId: payload.userId || null,
-        user: activeUser ? { id: activeUser.id, name: activeUser.name, username: activeUser.username, role: activeUser.role } : null,
+        user: activeUser
+          ? {
+              id: activeUser.id,
+              name: activeUser.name,
+              username: activeUser.username,
+              role: activeUser.role,
+            }
+          : null,
         createdAt: new Date(),
         items: itemsToProcess,
       };
 
       if (payload.customerId) {
-        const custIdx = memoryCustomers.findIndex((c) => c.id === payload.customerId);
+        const custIdx = memoryCustomers.findIndex(
+          (c) => c.id === payload.customerId,
+        );
         if (custIdx !== -1 && memoryCustomers[custIdx]) {
           memoryCustomers[custIdx]!.points += Math.floor(totalAmount / 10000);
         }
@@ -950,14 +1297,21 @@ export const POSStore = {
       const [aggregate, transactions] = await prisma.$transaction([
         prisma.transaction.aggregate({
           where,
-          _sum: { totalAmount: true, taxAmount: true, discountAmount: true, paymentAmount: true },
+          _sum: {
+            totalAmount: true,
+            taxAmount: true,
+            discountAmount: true,
+            paymentAmount: true,
+          },
           _count: { id: true },
         }),
         prisma.transaction.findMany({
           where,
           include: {
             customer: true,
-            user: { select: { id: true, name: true, username: true, role: true } },
+            user: {
+              select: { id: true, name: true, username: true, role: true },
+            },
             items: { include: { product: true } },
           },
           orderBy: { createdAt: "desc" },
@@ -969,7 +1323,10 @@ export const POSStore = {
       const totalDiscount = aggregate._sum.discountAmount || 0;
       const totalTransactions = aggregate._count.id || 0;
 
-      const paymentBreakdown: Record<string, { count: number; amount: number }> = {};
+      const paymentBreakdown: Record<
+        string,
+        { count: number; amount: number }
+      > = {};
       transactions.forEach((tx) => {
         const method = tx.paymentMethod || "CASH";
         if (!paymentBreakdown[method]) {
@@ -985,22 +1342,33 @@ export const POSStore = {
           totalTax,
           totalDiscount,
           totalTransactions,
-          averageTransaction: totalTransactions > 0 ? Math.round(totalRevenue / totalTransactions) : 0,
+          averageTransaction:
+            totalTransactions > 0
+              ? Math.round(totalRevenue / totalTransactions)
+              : 0,
         },
         paymentBreakdown,
         transactions,
       };
     } catch {
-      const totalRevenue = memoryTransactions.reduce((sum, t) => sum + t.totalAmount, 0);
+      const totalRevenue = memoryTransactions.reduce(
+        (sum, t) => sum + t.totalAmount,
+        0,
+      );
       return {
         summary: {
           totalRevenue,
           totalTax: 0,
           totalDiscount: 0,
           totalTransactions: memoryTransactions.length,
-          averageTransaction: memoryTransactions.length > 0 ? Math.round(totalRevenue / memoryTransactions.length) : 0,
+          averageTransaction:
+            memoryTransactions.length > 0
+              ? Math.round(totalRevenue / memoryTransactions.length)
+              : 0,
         },
-        paymentBreakdown: { CASH: { count: memoryTransactions.length, amount: totalRevenue } },
+        paymentBreakdown: {
+          CASH: { count: memoryTransactions.length, amount: totalRevenue },
+        },
         transactions: memoryTransactions,
       };
     }
@@ -1009,11 +1377,37 @@ export const POSStore = {
   // Dashboard Stats Calculation via SQL Aggregation
   async getDashboardStats() {
     try {
-      const [salesAggregate, totalTransactions, totalProducts, totalCustomers, lowStockProducts, recentTransactions, categories] = await Promise.all([
+      const startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
+
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999);
+      const [
+        salesAggregate,
+        totalTransactions,
+        totalProducts,
+        totalCustomers,
+        lowStockProducts,
+        recentTransactions,
+        categories,
+      ] = await Promise.all([
         prisma.transaction.aggregate({
           _sum: { totalAmount: true },
+          where: {
+            createdAt: {
+              gte: startOfDay,
+              lte: endOfDay,
+            },
+          },
         }),
-        prisma.transaction.count(),
+        prisma.transaction.count({
+          where: {
+            createdAt: {
+              gte: startOfDay,
+              lte: endOfDay,
+            },
+          },
+        }),
         prisma.product.count(),
         prisma.customer.count(),
         prisma.product.findMany({
@@ -1022,10 +1416,18 @@ export const POSStore = {
         }),
         prisma.transaction.findMany({
           take: 5,
+          where: {
+            createdAt: {
+              gte: startOfDay,
+              lte: endOfDay,
+            },
+          },
           orderBy: { createdAt: "desc" },
           include: {
             customer: true,
-            user: { select: { id: true, name: true, username: true, role: true } },
+            user: {
+              select: { id: true, name: true, username: true, role: true },
+            },
             items: { include: { product: true } },
           },
         }),
@@ -1034,6 +1436,14 @@ export const POSStore = {
             products: {
               include: {
                 transactionItems: {
+                  where: {
+                    transaction: {
+                      createdAt: {
+                        gte: startOfDay, // Greater than or equal (>= 00:00:00)
+                        lte: endOfDay, // Less than or equal (<= 23:59:59)
+                      },
+                    },
+                  },
                   select: { subtotal: true, quantity: true },
                 },
               },
@@ -1067,7 +1477,10 @@ export const POSStore = {
         recentTransactions,
       };
     } catch {
-      const totalSalesRevenue = memoryTransactions.reduce((sum: number, t: any) => sum + (t.totalAmount || 0), 0);
+      const totalSalesRevenue = memoryTransactions.reduce(
+        (sum: number, t: any) => sum + (t.totalAmount || 0),
+        0,
+      );
       const lowStockProducts = memoryProducts.filter((p: any) => p.stock <= 10);
 
       return {
@@ -1077,7 +1490,11 @@ export const POSStore = {
         totalCustomers: memoryCustomers.length,
         lowStockCount: lowStockProducts.length,
         lowStockProducts,
-        categoryBreakdown: memoryCategories.map((c) => ({ name: c.name, totalRevenue: 18000, totalQty: 1 })),
+        categoryBreakdown: memoryCategories.map((c) => ({
+          name: c.name,
+          totalRevenue: 18000,
+          totalQty: 1,
+        })),
         recentTransactions: memoryTransactions.slice(0, 5),
       };
     }

@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  UserCheck,
-  KeyRound,
-  X,
-  AlertCircle,
-  Check,
-  Mail,
-  Lock,
-} from "lucide-react";
+import { UserCheck, X, AlertCircle, Check, Lock } from "lucide-react";
 
 interface ProfileModalProps {
   currentUser: any;
@@ -43,7 +35,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
     }
 
     if (newPassword && !oldPassword) {
-      setError("Password lama wajib diisi untuk mengganti password");
+      setError("Masukkan password saat ini untuk melanjutkan.");
       return;
     }
 
@@ -86,6 +78,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
       <div className="glass-card max-w-md w-full p-6 relative border border-slate-700 shadow-2xl">
         <button
           onClick={onClose}
+          aria-label="Tutup pengaturan akun"
           className="absolute top-4 right-4 text-slate-400 hover:text-white"
         >
           <X className="w-5 h-5" />
@@ -96,9 +89,9 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
             <UserCheck className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white">Edit Profil Saya</h3>
+            <h3 className="text-xl font-bold text-white">Pengaturan Akun</h3>
             <p className="text-xs text-slate-400">
-              Perbarui nama, email, atau ganti password akun Anda.
+              Perbarui data diri atau perbarui kata sandi akun Anda.
             </p>
           </div>
         </div>
@@ -120,7 +113,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         <form onSubmit={handleSubmit} className="space-y-4 text-sm">
           <div>
             <label className="text-xs font-semibold text-slate-300 block mb-1">
-              Username Login (Permanent):
+              Username
             </label>
             <input
               type="text"
@@ -132,7 +125,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 
           <div>
             <label className="text-xs font-semibold text-slate-300 block mb-1">
-              Nama Lengkap:
+              Nama Lengkap
             </label>
             <input
               type="text"
@@ -148,7 +141,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               Email:
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
               <input
                 type="email"
                 placeholder="nama@email.com"
@@ -171,7 +163,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               </label>
               <input
                 type="password"
-                placeholder="Required jika ganti password..."
+                placeholder="Masukkan password lama..."
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
                 className="glass-input w-full text-xs font-mono"
@@ -181,7 +173,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="text-xs text-slate-400 block mb-1">
-                  Password Baru:
+                  Password Baru
                 </label>
                 <input
                   type="password"
@@ -193,7 +185,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               </div>
               <div>
                 <label className="text-xs text-slate-400 block mb-1">
-                  Konfirmasi Password:
+                  Konfirmasi Password
                 </label>
                 <input
                   type="password"
@@ -210,6 +202,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              disabled={loading}
               className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold"
             >
               Batal
@@ -219,7 +212,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
               disabled={loading}
               className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-xl shadow-lg shadow-indigo-500/20 disabled:opacity-50"
             >
-              {loading ? "Simpan..." : "Simpan Perubahan"}
+              {loading ? "Menyimpan..." : "Simpan Perubahan"}
             </button>
           </div>
         </form>

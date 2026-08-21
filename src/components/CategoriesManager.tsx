@@ -113,10 +113,10 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <FolderPlus className="w-6 h-6 text-indigo-400" />
-            <span>Master Data Kategori</span>
+            <span>Kategori Produk</span>
           </h2>
           <p className="text-xs text-slate-400">
-            Pengelompokan jenis produk untuk mempermudah POS kasir & pencarian.
+            Kelola kelompok menu untuk mempermudah transaksi penjualan.
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
           className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-xl transition cursor-pointer shadow-lg shadow-indigo-500/20"
         >
           <Plus className="w-4 h-4" />
-          <span>Tambah Kategori Baru</span>
+          <span>+ Kategori</span>
         </button>
       </div>
 
@@ -137,7 +137,7 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
           </div>
         ) : categories.length === 0 ? (
           <div className="col-span-full text-center py-12 text-slate-500">
-            Belum ada data kategori.
+            Belum ada data kategori yang dibuat.
           </div>
         ) : (
           categories.map((cat) => (
@@ -188,7 +188,7 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
             </button>
 
             <h3 className="text-xl font-bold text-white mb-4">
-              {editingId ? "Edit Kategori" : "Tambah Kategori Baru"}
+              {editingId ? "Ubah Kategori" : "Kategori Baru"}
             </h3>
 
             {modalError && (
@@ -206,7 +206,7 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
                 <input
                   type="text"
                   required
-                  placeholder="Contoh: Makanan Utama, Minuman..."
+                  placeholder="Misal: Makanan Utama, Minuman..."
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
@@ -221,7 +221,7 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
                 </label>
                 <textarea
                   rows={3}
-                  placeholder="Keterangan singkat kategori..."
+                  placeholder="Catatan atau detail kelompok menu (opsional)"
                   value={formData.description}
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
@@ -242,7 +242,7 @@ export const CategoriesManager: React.FC<CategoriesManagerProps> = ({
                   type="submit"
                   className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-xl shadow-lg shadow-indigo-500/20"
                 >
-                  Simpan Kategori
+                  Simpan
                 </button>
               </div>
             </form>

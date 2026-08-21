@@ -75,11 +75,10 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             <Store className="w-7 h-7" />
           </div>
           <h1 className="text-2xl font-extrabold text-white tracking-tight">
-            Point of Sale System
+            CAFE PANDAWA
           </h1>
           <p className="text-xs text-slate-400">
-            Silakan login dengan akun PostgreSQL terenkripsi (Bcrypt & JWT
-            Session).
+            Silakan login dengan akun yang sudah terdaftar
           </p>
         </div>
 
@@ -128,23 +127,23 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
             className="w-full py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 transition cursor-pointer flex items-center justify-center gap-2 text-xs"
           >
             {loading ? (
-              <span>Memverifikasi Password Bcrypt & JWT...</span>
+              <span>Memverifikasi Data</span>
             ) : (
               <>
                 <LogIn className="w-4 h-4" />
-                <span>Masuk & Generate JWT Session</span>
+                <span>Masuk</span>
               </>
             )}
           </button>
         </form>
 
         {/* Security Badge */}
-        <div className="flex items-center justify-center gap-2 py-2 px-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[11px] text-emerald-300">
+        {/* <div className="flex items-center justify-center gap-2 py-2 px-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-[11px] text-emerald-300">
           <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>
             Keamanan Terjamin: Password Bcrypt Hash & JWT Session Token
           </span>
-        </div>
+        </div> */}
 
         {/* Quick Demo Login Presets */}
         <div className="pt-3 border-t border-slate-800/80">

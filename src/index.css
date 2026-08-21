@@ -25,8 +25,232 @@
       sans-serif;
     min-height: 100vh;
     margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
+
+/* ==========================================
+   LIGHT MODE DESIGN SYSTEM OVERRIDES
+   ========================================== */
+
+/* Body & Root */
+html.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Root background containers */
+html.light .bg-\[\#0b1329\] {
+  background-color: #f8fafc !important;
+}
+
+/* Glass Cards & Containers */
+html.light .glass-card {
+  background: #ffffff !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -2px rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Glass Inputs */
+html.light .glass-input {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+html.light .glass-input::placeholder {
+  color: #94a3b8 !important;
+}
+html.light .glass-input:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15) !important;
+}
+
+/* Sidebar in Light Mode */
+html.light aside {
+  background-color: #ffffff !important;
+  border-right-color: #e2e8f0 !important;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.03) !important;
+}
+
+html.light aside h1 {
+  color: #0f172a !important;
+}
+
+html.light aside .bg-slate-950\/60 {
+  background-color: #f1f5f9 !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light aside .bg-slate-950\/60 p,
+html.light aside .bg-slate-950\/60 span:not(.bg-purple-500\/20):not(.bg-emerald-500\/20) {
+  color: #0f172a !important;
+}
+
+html.light aside nav button:not(.bg-gradient-to-r) {
+  color: #475569 !important;
+}
+
+html.light aside nav button:not(.bg-gradient-to-r):hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Top Navbar Header */
+html.light header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom-color: #e2e8f0 !important;
+  backdrop-filter: blur(12px);
+}
+
+html.light header button {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html.light header button span,
+html.light header button .text-slate-200,
+html.light header button .text-slate-300,
+html.light header button .text-slate-400 {
+  color: #0f172a !important;
+}
+
+/* Hero Banners & Dark Container Preservation */
+html.light .from-slate-900 {
+  background-image: linear-gradient(to right, #0f172a, #1e1b4b, #0f172a) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+html.light .from-slate-900 h1,
+html.light .from-slate-900 span,
+html.light .from-slate-900 p {
+  color: #ffffff !important;
+}
+html.light .from-slate-900 p {
+  color: #cbd5e1 !important;
+}
+
+/* Buttons with Gradient / Primary background keep White Text */
+html.light .bg-gradient-to-r,
+html.light .bg-indigo-600,
+html.light .bg-emerald-600,
+html.light .bg-purple-600 {
+  color: #ffffff !important;
+}
+
+/* Card Text Styling in Light Mode */
+html.light .glass-card h1,
+html.light .glass-card h2,
+html.light .glass-card h3,
+html.light .glass-card h4 {
+  color: #0f172a;
+}
+
+html.light .glass-card p.text-white,
+html.light .glass-card div.text-white,
+html.light .glass-card span.text-white,
+html.light .glass-card p.text-slate-100,
+html.light .glass-card p.text-slate-200,
+html.light .glass-card span.text-slate-200 {
+  color: #0f172a;
+}
+
+html.light .glass-card .text-slate-300,
+html.light .glass-card .text-slate-400 {
+  color: #64748b;
+}
+
+/* Buttons inside Glass Cards */
+html.light .glass-card .bg-slate-800,
+html.light .glass-card .bg-slate-800\/80,
+html.light .glass-card .bg-slate-800\/60,
+html.light .glass-card .bg-slate-800\/40,
+html.light header .bg-slate-800,
+html.light header .bg-slate-800\/80 {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+html.light .glass-card .bg-slate-800:hover,
+html.light .glass-card .bg-slate-800\/80:hover,
+html.light header .bg-slate-800\/80:hover {
+  background-color: #e2e8f0 !important;
+}
+
+/* Table Light Mode Styling */
+html.light table thead {
+  background-color: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom-color: #e2e8f0 !important;
+}
+
+html.light table tbody tr {
+  border-bottom-color: #f1f5f9 !important;
+}
+
+html.light table tbody tr:hover {
+  background-color: #f8fafc !important;
+}
+
+html.light table tbody td.text-white,
+html.light table tbody td .text-white {
+  color: #0f172a !important;
+}
+
+/* Badges & Alert Cards in Light Mode */
+html.light .bg-amber-500\/10 {
+  background-color: #fffbeb !important;
+  border-color: #fde68a !important;
+}
+html.light .bg-amber-500\/10 p,
+html.light .bg-amber-500\/10 span {
+  color: #78350f !important;
+}
+
+html.light .bg-amber-500\/20 {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fcd34d !important;
+}
+
+html.light .bg-emerald-500\/10,
+html.light .bg-emerald-500\/20 {
+  background-color: #d1fae5 !important;
+  color: #065f46 !important;
+  border-color: #6ee7b7 !important;
+}
+
+html.light .bg-purple-500\/20 {
+  background-color: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border-color: #d8b4fe !important;
+}
+
+html.light .bg-indigo-500\/20,
+html.light .bg-indigo-500\/10 {
+  background-color: #e0e7ff !important;
+  color: #3730a3 !important;
+  border-color: #a5b4fc !important;
+}
+
+/* Inner Slate Cards */
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/40,
+html.light .bg-slate-900 {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/80 {
+  border-color: #e2e8f0 !important;
+}
+
+/* ==========================================
+   DEFAULT / DARK MODE GLASS & UTILITIES
+   ========================================== */
 
 .glass-card {
   background: rgba(30, 41, 59, 0.75);
@@ -78,6 +302,13 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+html.light ::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.8);
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+}
+
 @keyframes pulse-slow {
   0%,
   100% {
@@ -91,3 +322,5 @@
 .animate-pulse-slow {
   animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+

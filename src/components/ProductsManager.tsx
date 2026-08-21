@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Plus,
   Edit2,
@@ -7,11 +7,15 @@ import {
   Package,
   AlertCircle,
   X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 interface ProductsManagerProps {
   token?: string;
 }
+
+const ITEMS_PER_PAGE = 15;
 
 export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
   const [products, setProducts] = useState<any[]>([]);
@@ -19,10 +23,12 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Modal State
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     sku: "",
     name: "",
@@ -40,25 +46,29 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
     : {};
 
   useEffect(() => {
-    fetchData();
+    const controller = new AbortController();
+    fetchData(controller.signal);
+    return () => controller.abort();
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (signal?: AbortSignal) => {
     setLoading(true);
     try {
       const [resP, resC] = await Promise.all([
-        fetch("/api/products", { headers: authHeaders }),
-        fetch("/api/categories", { headers: authHeaders }),
+        fetch("/api/products", { headers: authHeaders, signal }),
+        fetch("/api/categories", { headers: authHeaders, signal }),
       ]);
       const dataP = await resP.json();
       const dataC = await resC.json();
 
       if (dataP.success) setProducts(dataP.data);
       if (dataC.success) setCategories(dataC.data);
-    } catch (err) {
-      console.error("Failed to load products master data", err);
+    } catch (err: any) {
+      if (err?.name !== "AbortError") {
+        console.error("Failed to load products master data", err);
+      }
     } finally {
-      setLoading(false);
+      if (!signal?.aborted) setLoading(false);
     }
   };
 
@@ -103,6 +113,8 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
       const url = editingId ? `/api/products/${editingId}` : "/api/products";
       const method = editingId ? "PUT" : "POST";
@@ -122,6 +134,8 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
       }
     } catch (err: any) {
       setModalError("Terjadi kesalahan jaringan");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -144,13 +158,27 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
     }
   };
 
-  const filtered = products.filter((p) => {
-    const matchesSearch =
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.sku.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCat = !selectedCategory || p.categoryId === selectedCategory;
-    return matchesSearch && matchesCat;
-  });
+  const filtered = useMemo(() => {
+    return products.filter((p) => {
+      const matchesSearch =
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.sku.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCat = !selectedCategory || p.categoryId === selectedCategory;
+      return matchesSearch && matchesCat;
+    });
+  }, [products, searchQuery, selectedCategory]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / ITEMS_PER_PAGE));
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filtered.slice(start, start + ITEMS_PER_PAGE);
+  }, [filtered, currentPage]);
+
+  // Reset ke halaman 1 setiap kali filter berubah, supaya tidak
+  // "nyangkut" di halaman kosong.
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
 
   const formatIDR = (val: number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -167,10 +195,10 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
         <div>
           <h2 className="text-2xl font-bold text-white flex items-center gap-2">
             <Package className="w-6 h-6 text-indigo-400" />
-            <span>Master Data Produk</span>
+            <span>Katalog Produk</span>
           </h2>
           <p className="text-xs text-slate-400">
-            Kelola inventaris barang, SKU, harga jual, dan persediaan stok.
+            Kelola harga, stok, dan rincian barang cafe disini.
           </p>
         </div>
 
@@ -179,7 +207,7 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
           className="flex items-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-xl transition cursor-pointer shadow-lg shadow-indigo-500/20"
         >
           <Plus className="w-4 h-4" />
-          <span>Tambah Produk Baru</span>
+          <span>+ Produk</span>
         </button>
       </div>
 
@@ -189,7 +217,7 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
           <Search className="w-4 h-4 absolute left-3 top-3.5 text-slate-400" />
           <input
             type="text"
-            placeholder="Cari berdasarkan nama atau SKU..."
+            placeholder="Cari nama atau SKU..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="glass-input w-full pl-9 text-sm"
@@ -202,7 +230,7 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="glass-input w-full text-xs"
           >
-            <option value="">-- Semua Kategori --</option>
+            <option value="">Semua Kategori</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -218,6 +246,7 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
           <table className="w-full text-left text-sm text-slate-300">
             <thead className="bg-slate-900/60 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
               <tr>
+                <th className="px-4 py-3.5 w-12 text-center">No</th>
                 <th className="px-4 py-3.5">SKU</th>
                 <th className="px-4 py-3.5">Nama Produk</th>
                 <th className="px-4 py-3.5">Kategori</th>
@@ -229,22 +258,25 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
             <tbody className="divide-y divide-slate-800/60">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-8 text-slate-500">
+                  <td colSpan={7} className="text-center py-8 text-slate-500">
                     Memuat data produk...
                   </td>
                 </tr>
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="text-center py-8 text-slate-500">
-                    Tidak ada data produk yang sesuai.
+                  <td colSpan={7} className="text-center py-8 text-slate-500">
+                    Produk tidak ditemukan.
                   </td>
                 </tr>
               ) : (
-                filtered.map((prod) => (
+                paginatedProducts.map((prod, index) => (
                   <tr
                     key={prod.id}
                     className="hover:bg-slate-800/40 transition"
                   >
+                    <td className="px-4 py-3.5 text-center text-xs text-slate-500">
+                      {(currentPage - 1) * ITEMS_PER_PAGE + index + 1}
+                    </td>
                     <td className="px-4 py-3.5 font-mono text-xs font-semibold text-indigo-300">
                       {prod.sku}
                     </td>
@@ -293,19 +325,21 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
                               : "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                         }`}
                       >
-                        {prod.stock} unit
+                        Stok Habis
                       </span>
                     </td>
                     <td className="px-4 py-3.5 text-center">
                       <div className="flex justify-center items-center gap-2">
                         <button
                           onClick={() => handleOpenEdit(prod)}
+                          aria-label={`Ubah produk ${prod.name}`}
                           className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition cursor-pointer"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(prod.id, prod.name)}
+                          aria-label={`Hapus produk ${prod.name}`}
                           className="p-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-lg transition cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -318,6 +352,39 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
             </tbody>
           </table>
         </div>
+
+        {!loading && filtered.length > 0 && (
+          <div className="flex items-center justify-between px-4 py-3 border-t border-slate-800 text-xs text-slate-400">
+            <span>
+              Menampilkan {(currentPage - 1) * ITEMS_PER_PAGE + 1}–
+              {Math.min(currentPage * ITEMS_PER_PAGE, filtered.length)} dari{" "}
+              {filtered.length} produk
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                aria-label="Halaman sebelumnya"
+                className="p-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-300 rounded-lg transition cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <span className="font-semibold text-slate-300">
+                {currentPage} / {totalPages}
+              </span>
+              <button
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(totalPages, p + 1))
+                }
+                disabled={currentPage === totalPages}
+                aria-label="Halaman berikutnya"
+                className="p-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-300 rounded-lg transition cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Add / Edit Modal */}
@@ -326,13 +393,14 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
           <div className="glass-card max-w-lg w-full p-6 relative border border-slate-700 shadow-2xl">
             <button
               onClick={() => setShowModal(false)}
+              aria-label="Tutup modal"
               className="absolute top-4 right-4 text-slate-400 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
             <h3 className="text-xl font-bold text-white mb-4">
-              {editingId ? "Edit Master Produk" : "Tambah Produk Baru"}
+              {editingId ? "Ubah Produk" : "Tambah Produk Baru"}
             </h3>
 
             {modalError && (
@@ -346,7 +414,7 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-xs font-semibold text-slate-300 block mb-1">
-                    SKU Produk:
+                    Kode SKU:
                   </label>
                   <input
                     type="text"
@@ -483,15 +551,17 @@ export const ProductsManager: React.FC<ProductsManagerProps> = ({ token }) => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
+                  disabled={isSubmitting}
                   className="px-4 py-2 bg-slate-800 text-slate-300 rounded-xl text-xs font-semibold"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-xl shadow-lg shadow-indigo-500/20"
                 >
-                  Simpan Produk
+                  {isSubmitting ? "Menyimpan..." : "Simpan Produk"}
                 </button>
               </div>
             </form>

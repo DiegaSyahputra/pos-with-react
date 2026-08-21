@@ -79,4 +79,6 @@ export const app = new Elysia()
   })
   .listen(PORT);
 
-console.log(`🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`);
+console.log(
+  `🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`,
+);
