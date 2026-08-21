@@ -1,5 +1,4 @@
 {
-  "bunVersion": "1.x",
   "buildCommand": "bun run build",
   "outputDirectory": "dist",
   "rewrites": [
@@ -8,8 +7,8 @@
       "destination": "/api/index.ts"
     },
     {
-      "source": "/(.*)",
-      "destination": "/api/index.ts"
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }

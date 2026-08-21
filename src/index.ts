@@ -62,17 +62,15 @@ export const app = new Elysia()
   .use(authMiddleware)
 
   // BUNGKUS SEMUA API ROUTES DI DALAM GROUP /api
-  .group("/api", (app) =>
-    app
-      .use(authRoutes)
-      .use(usersRoutes)
-      .use(categoriesRoutes)
-      .use(productsRoutes)
-      .use(customersRoutes)
-      .use(transactionsRoutes)
-      .use(dashboardRoutes)
-      .use(reportsRoutes),
-  )
+
+  .use(authRoutes)
+  .use(usersRoutes)
+  .use(categoriesRoutes)
+  .use(productsRoutes)
+  .use(customersRoutes)
+  .use(transactionsRoutes)
+  .use(dashboardRoutes)
+  .use(reportsRoutes)
 
   // Serve Frontend Bundled JS & CSS
   .get("/frontend.js", async () => {
