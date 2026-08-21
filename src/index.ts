@@ -121,3 +121,5 @@ export const app = new Elysia()
 console.log(
   `🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`,
 );
+
+export default app;
