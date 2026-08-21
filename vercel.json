@@ -1,12 +1,15 @@
 {
   "bunVersion": "1.x",
-  "framework": null,
   "buildCommand": "bun run build",
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
+    },
+    {
       "source": "/(.*)",
-      "destination": "/src/index.ts"
+      "destination": "/api/index.ts"
     }
   ]
 }

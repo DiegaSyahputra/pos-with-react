@@ -15,7 +15,6 @@ import { reportsRoutes } from "./routes/reports";
 const PORT = Number(process.env.PORT) || 3000;
 const isProduction = process.env.NODE_ENV === "production";
 
-// Tentukan lokasi file berdasarkan lingkungan (Production = dist, Dev = src)
 const htmlPath = isProduction
   ? path.join(process.cwd(), "dist", "index.html")
   : path.join(process.cwd(), "src", "index.html");
@@ -28,7 +27,6 @@ let cachedBundle = "";
 let lastBuildTime = 0;
 
 async function getFrontendBundle() {
-  // Jika di Production, langsung baca file hasil build di folder dist/
   if (isProduction) {
     const bundleFile = Bun.file(
       path.join(process.cwd(), "dist", "frontend.js"),
@@ -38,7 +36,6 @@ async function getFrontendBundle() {
     }
   }
 
-  // Jika di Development, lakukan live bundling on-the-fly
   if (Date.now() - lastBuildTime > 1000 || !cachedBundle) {
     try {
       const result = await Bun.build({
@@ -60,46 +57,42 @@ async function getFrontendBundle() {
 }
 
 export const app = new Elysia()
-  // Enable CORS & HTML plugin
   .use(cors())
   .use(html())
-  // Register Auth Middleware Macro Globally
   .use(authMiddleware)
-  // Register POS API Routes
-  .use(authRoutes)
-  .use(usersRoutes)
-  .use(categoriesRoutes)
-  .use(productsRoutes)
-  .use(customersRoutes)
-  .use(transactionsRoutes)
-  .use(dashboardRoutes)
-  .use(reportsRoutes)
 
-  // Serve Bundled React Application Code
+  // BUNGKUS SEMUA API ROUTES DI DALAM GROUP /api
+  .group("/api", (app) =>
+    app
+      .use(authRoutes)
+      .use(usersRoutes)
+      .use(categoriesRoutes)
+      .use(productsRoutes)
+      .use(customersRoutes)
+      .use(transactionsRoutes)
+      .use(dashboardRoutes)
+      .use(reportsRoutes),
+  )
+
+  // Serve Frontend Bundled JS & CSS
   .get("/frontend.js", async () => {
     const jsCode = await getFrontendBundle();
     return new Response(jsCode, {
       headers: { "Content-Type": "application/javascript; charset=utf-8" },
     });
   })
-
-  // Serve CSS Stylesheet
   .get("/index.css", async () => {
     return new Response(Bun.file(cssPath), {
       headers: { "Content-Type": "text/css; charset=utf-8" },
     });
   })
-
-  // Serve Static Media / Images
   .get("/src/*", ({ params }) => {
     const filePath = `./src/${params["*"]}`;
     return new Response(Bun.file(filePath));
   })
 
-  // Catch-All SPA Routing (HTML Fallback)
+  // Catch-All SPA HTML Fallback
   .get("/*", async ({ path: reqPath, set }) => {
-    // KUNCI PERBAIKAN: Jika request meminta file statis (.js, .css, .png, dll) yang tidak ditemukan,
-    // kembalikan 404 dan BUKAN mengembalikan index.html (mencegah layar blank/MIME error).
     if (reqPath.includes(".")) {
       set.status = 404;
       return "File not found";
@@ -115,11 +108,14 @@ export const app = new Elysia()
     return new Response(htmlContent, {
       headers: { "Content-Type": "text/html; charset=utf-8" },
     });
-  })
-  .listen(PORT);
+  });
 
-console.log(
-  `🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`,
-);
+// Jalankan listen hanya saat di luar Vercel (Lokal/Development)
+if (process.env.VERCEL !== "1") {
+  app.listen(PORT);
+  console.log(
+    `🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`,
+  );
+}
 
 export default app;
