@@ -76,9 +76,11 @@ export const app = new Elysia()
     return new Response(htmlContent, {
       headers: { "Content-Type": "text/html; charset=utf-8" },
     });
-  })
-  .listen(PORT);
+  });
 
-console.log(
-  `🚀 POS Web Application & Elysia Backend active on http://localhost:${PORT}`,
-);
+if (!process.env.VERCEL) {
+  app.listen(PORT);
+  console.log(`🚀 POS aktif di http://localhost:${PORT}`);
+}
+
+export default app;
